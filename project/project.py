@@ -1,7 +1,7 @@
 from PIL import Image
 import random
 
-def readCorrectAnswers(filename='names.txt'):
+def read_correct_answers(filename='names.txt'):
     ans = {}
 
     with open(filename, 'r', encoding='utf-8') as f:
@@ -12,14 +12,24 @@ def readCorrectAnswers(filename='names.txt'):
 
     return ans
 
+user_name = input('Добро пожаловать в игру! Как вас зовут? ')
+user_name = user_name[0].upper() + user_name[1:]
 
 def play():
-    true_ans = readCorrectAnswers()
+    true_ans = read_correct_answers()
     filenames = list(true_ans.keys())
 
     score = 0
 
     while True:
+
+        consent = input(f'{user_name}, вы готовы начать? ')
+        if consent.lower() == 'да':
+            print('Хорошо, начинаем.')
+        else:
+            input('Вы готовы сейчас? ')
+            continue
+
         filename = random.choice(filenames)
         with Image.open(filename) as im:
             im.show()
@@ -31,9 +41,13 @@ def play():
                 break
         else:
             print(f'Спасибо за небезынтересную попытку ответа. На самом деле это {true_ans[filename]}')
+            replay = input('Хотите сыграть еще раз? ')
+            if replay.lower() == "да":
+                print(f'Вы набрали {score} очков')
+                score = 0
+                continue
             break
 
-    print(f'Вы набрали {score} очков')
-
+    print(f'Вы набрали {score} очков.')
 
 play()
