@@ -1,0 +1,7 @@
+Acetic-acid.png;уксусная кислота
+Benzol.png;бензол
+Ethanol.png;этанол
+Ethylene.png;этиленгликоль
+Methane.png;метан
+Nitroglycerin.png;нитроглицерин
+Propane.png;пропан
