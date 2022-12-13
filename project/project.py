@@ -1,6 +1,9 @@
 from PIL import Image
 import random
+from datetime import datetime
+import time
 
+start_time = datetime.now()
 def read_correct_answers(filename='names.txt'):
     ans = {}
 
@@ -13,12 +16,13 @@ def read_correct_answers(filename='names.txt'):
     return ans
 
 user_name = input('Добро пожаловать в игру! Как вас зовут? ')
-user_name = user_name[0].upper() + user_name[1:]
+user_name = user_name.title()
 
 def play():
     true_ans = read_correct_answers()
     filenames = list(true_ans.keys())
 
+    global score
     score = 0
 
     while True:
@@ -51,3 +55,9 @@ def play():
     print(f'Вы набрали {score} очков.')
 
 play()
+
+with open("results.txt", "a", encoding='utf-8') as file:
+    file.write(str({user_name}) + ', ' + str(datetime.now() - start_time) + ', ' + str(score) + '\n')
+
+
+
